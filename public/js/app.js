@@ -7,28 +7,28 @@ const storeItems = [
         id: 'wpn_m4a1', 
         name: 'M4A1 Assault Rifle', 
         price: 'R$ 25,00', 
-        image: '/img/m4a1_rifle.png',
+        image: './public/img/m4a1_rifle.png',
         tag: 'Arma'
     },
     { 
         id: 'gear_plate', 
         name: 'Plate Carrier Tático', 
         price: 'R$ 15,00', 
-        image: '/img/plate_carrier.png',
+        image: './public/img/plate_carrier.png',
         tag: 'Equipamento'
     },
     { 
         id: 'veh_mh6', 
         name: 'MH-6 Little Bird', 
         price: 'R$ 80,00', 
-        image: '/img/little_bird.png',
+        image: './public/img/little_bird.png',
         tag: 'Veículo'
     },
     { 
         id: 'ammo_556', 
         name: 'Caixa Munição 5.56', 
         price: 'R$ 5,00', 
-        image: '/img/ammo_box.png',
+        image: './public/img/ammo_box.png',
         tag: 'Suprimento'
     }
 ];
@@ -38,35 +38,55 @@ document.addEventListener('DOMContentLoaded', () => {
     renderStoreItems();
 });
 
-// Busca os dados do usuário via API que configuramos no server.js
-async function checkUserLogin() {
-    try {
-        const response = await fetch('/api/user');
-        const userData = await response.json();
+// Como o GitHub Pages é apenas Frontend (HTML/JS/CSS), não temos um Servidor Backend Node.js.
+// Então usamos o localStorage do navegador para simular a sessão de um usuário "logado".
+function checkUserLogin() {
+    const savedUser = localStorage.getItem('exiladosz_user');
+    
+    if (savedUser) {
+        const userData = JSON.parse(savedUser);
+        currentSteamID = userData.steamid;
         
         const userSection = document.getElementById('user-section');
         
-        if (userData.loggedIn) {
-            currentSteamID = userData.steamid;
-            
-            // Atualiza a UI para mostrar perfil do usuário
-            userSection.innerHTML = `
-                <div class="flex items-center gap-4 bg-card px-4 py-2 rounded-xl border border-gray-800 shadow-md fade-in">
-                    <div class="text-right hidden sm:block">
-                        <div class="text-sm font-bold text-white leading-tight">${userData.personaname}</div>
-                        <div class="text-xs text-primary font-mono mt-0.5">ID: ${userData.steamid}</div>
-                    </div>
-                    <img src="${userData.avatar}" alt="Avatar" class="w-11 h-11 rounded-lg border border-gray-600 shadow-sm">
-                    <div class="w-px h-8 bg-gray-700 mx-2"></div>
-                    <a href="/logout" class="text-gray-400 hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg hover:bg-gray-800" title="Sair da Conta">
-                        <i class="fas fa-sign-out-alt text-xl"></i>
-                    </a>
+        // Atualiza a UI para mostrar perfil do usuário
+        userSection.innerHTML = `
+            <div class="flex items-center gap-4 bg-card px-4 py-2 rounded-xl border border-gray-800 shadow-md fade-in">
+                <div class="text-right hidden sm:block">
+                    <div class="text-sm font-bold text-white leading-tight">${userData.personaname}</div>
+                    <div class="text-xs text-primary font-mono mt-0.5">ID: ${userData.steamid}</div>
                 </div>
-            `;
-        }
-    } catch (error) {
-        console.error('Falha ao checar status de login:', error);
+                <!-- Usando um avatar genérico para a simulação -->
+                <img src="${userData.avatar}" alt="Avatar" class="w-11 h-11 rounded-lg border border-gray-600 shadow-sm">
+                <div class="w-px h-8 bg-gray-700 mx-2"></div>
+                <button onclick="logout()" class="text-gray-400 hover:text-primary transition-colors flex items-center justify-center p-2 rounded-lg hover:bg-gray-800" title="Sair da Conta">
+                    <i class="fas fa-sign-out-alt text-xl"></i>
+                </button>
+            </div>
+        `;
     }
+}
+
+// Função chamada quando o usuário clica no novo botão de Login
+function simulateSteamLogin() {
+    // Simulando o retorno de dados que a Steam daria
+    const mockUser = {
+        steamid: '76561198000000000',
+        personaname: 'Sobrevivente Z',
+        avatar: 'https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg'
+    };
+
+    // Salva no navegador
+    localStorage.setItem('exiladosz_user', JSON.stringify(mockUser));
+    
+    // Atualiza a página para aplicar a navbar
+    window.location.reload();
+}
+
+// Função de deslogar
+function logout() {
+    localStorage.removeItem('exiladosz_user');
+    window.location.reload();
 }
 
 // Renderiza os cards de itens dinamicamente
@@ -103,7 +123,7 @@ function renderStoreItems() {
 // Função simuladora de compra exigida no requisito
 function simulatePurchase(itemId) {
     if (!currentSteamID) {
-        alert("🔒 Autenticação Necessária:\\nPor favor, faça login com sua conta Steam antes de realizar compras.");
+        alert("🔒 Autenticação Necessária:\nPor favor, faça login com sua conta Steam antes de realizar compras.");
         return;
     }
 
@@ -121,5 +141,5 @@ Status          : Processamento Simulado com Sucesso
     
     console.log(consoleMsg);
     
-    alert(`✅ Compra Registrada no Sistema!\\n\\nItem: ${item.name}\\nSteamID do Comprador: ${currentSteamID}\\n\\nVerifique o console (F12) para os logs de integração.`);
+    alert(`✅ Compra Registrada no Sistema!\n\nItem: ${item.name}\nSteamID do Comprador: ${currentSteamID}\n\nVerifique o console (F12) para os logs de integração.`);
 }

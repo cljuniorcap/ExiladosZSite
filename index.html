@@ -27,7 +27,7 @@
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body class="bg-darker text-gray-200 font-sans antialiased min-h-screen flex flex-col">
 
@@ -40,11 +40,11 @@
                     <span class="text-3xl font-extrabold tracking-tighter uppercase">Exilados<span class="text-primary">Z</span></span>
                 </div>
                 <div id="user-section" class="flex items-center">
-                    <!-- Botão de login Steam inicial -->
-                    <a href="/auth/steam" class="btn-steam flex items-center gap-2 bg-[#171a21] hover:bg-[#2a303c] text-white px-5 py-2.5 rounded-lg transition-all border border-gray-700 shadow-xl font-semibold">
+                    <!-- Botão de login Steam simulado (Frontend) -->
+                    <button onclick="simulateSteamLogin()" class="btn-steam flex items-center gap-2 bg-[#171a21] hover:bg-[#2a303c] text-white px-5 py-2.5 rounded-lg transition-all border border-gray-700 shadow-xl font-semibold">
                         <i class="fab fa-steam text-2xl"></i>
-                        <span>Entrar com Steam</span>
-                    </a>
+                        <span>Entrar com Steam (Simulação)</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -76,6 +76,6 @@
     </footer>
 
     <!-- Script Principal -->
-    <script src="/js/app.js"></script>
+    <script src="./public/js/app.js"></script>
 </body>
 </html>
