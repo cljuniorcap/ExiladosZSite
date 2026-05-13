@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExiladosZ - Loja de Suprimentos</title>
+    <!-- Tailwind CSS (CDN para protótipo rápido) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ef4444', // Vermelho vibrante
+                        dark: '#121212',
+                        darker: '#09090b',
+                        card: '#18181b',
+                        cardhover: '#27272a'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-darker text-gray-200 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Navegação -->
+    <nav class="bg-dark/80 backdrop-blur-md border-b border-gray-800 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-biohazard text-primary text-3xl"></i>
+                    <span class="text-3xl font-extrabold tracking-tighter uppercase">Exilados<span class="text-primary">Z</span></span>
+                </div>
+                <div id="user-section" class="flex items-center">
+                    <!-- Botão de login Steam inicial -->
+                    <a href="/auth/steam" class="btn-steam flex items-center gap-2 bg-[#171a21] hover:bg-[#2a303c] text-white px-5 py-2.5 rounded-lg transition-all border border-gray-700 shadow-xl font-semibold">
+                        <i class="fab fa-steam text-2xl"></i>
+                        <span>Entrar com Steam</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+        
+        <!-- Cabeçalho -->
+        <div class="mb-14 text-center relative">
+            <div class="absolute inset-0 bg-primary/10 blur-[100px] rounded-full w-1/2 h-1/2 mx-auto -z-10"></div>
+            <h1 class="text-5xl font-black text-white mb-4 tracking-tight drop-shadow-md">Mercado Negro</h1>
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">Equipe-se com o melhor arsenal disponível na zona de exclusão. Sobrevivência é garantida apenas para os preparados.</p>
+        </div>
+
+        <!-- Grade de Itens (Gerada por JS) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8" id="items-grid">
+            <!-- Cards injetados aqui -->
+        </div>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="bg-dark border-t border-gray-800 mt-auto py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-500 text-sm flex flex-col items-center gap-2">
+            <p>&copy; 2026 ExiladosZ Server. Sistema de protótipo.</p>
+            <p class="text-xs text-gray-600">Este é um ambiente simulado. Nenhum valor real é transacionado.</p>
+        </div>
+    </footer>
+
+    <!-- Script Principal -->
+    <script src="/js/app.js"></script>
+</body>
+</html>
